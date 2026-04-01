@@ -3,6 +3,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./models/users/user.entity";
 import { Role } from "./models/users/role.entity";
 import { Leave } from "./models/users/leaves.entity";
+import { RoleService } from "./services/role.service";
+import { RoleController } from "./controller/roles/roles.controller";
 
 @Module({
     imports: [
@@ -15,8 +17,11 @@ import { Leave } from "./models/users/leaves.entity";
             port: 5432,
             synchronize: true,
             logging: true,
-            entities: [Role, User, Leave]
-        })
-    ]
+            entities: [Role, User, Leave],
+        }),
+        TypeOrmModule.forFeature([Role, User, Leave])
+    ],
+    providers: [RoleService],
+    controllers: [RoleController]
 })
 export class AppModule{}

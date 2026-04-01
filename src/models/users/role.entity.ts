@@ -4,7 +4,7 @@ import { IsString } from "class-validator";
 
 @Entity('roles')
 export class Role extends BaseEntity {
-    @Column({name: 'name'})
+    @Column({name: 'name', unique: true})
     @IsString()
     name: string
 }
