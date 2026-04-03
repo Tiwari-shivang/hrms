@@ -5,6 +5,10 @@ import { Role } from "./models/users/role.entity";
 import { Leave } from "./models/users/leaves.entity";
 import { RoleService } from "./services/role.service";
 import { RoleController } from "./controller/roles.controller";
+import { AuthService } from "./services/auth.service";
+import { AuthController } from "./controller/auth.controller";
+import { JwtModule, JwtService } from "@nestjs/jwt";
+import { GuardService } from "./services/guard.service";
 
 @Module({
     imports: [
@@ -19,9 +23,12 @@ import { RoleController } from "./controller/roles.controller";
             logging: true,
             entities: [Role, User, Leave],
         }),
-        TypeOrmModule.forFeature([Role, User, Leave])
+        TypeOrmModule.forFeature([Role, User, Leave]),
+        JwtModule.register({
+            secret: 'my-secret-key-long-enough'
+        })
     ],
-    providers: [RoleService],
-    controllers: [RoleController]
+    providers: [RoleService, AuthService, GuardService],
+    controllers: [RoleController, AuthController]
 })
 export class AppModule{}

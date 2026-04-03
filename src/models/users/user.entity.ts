@@ -22,7 +22,7 @@ export class User extends BaseEntity {
 
     @IsString()
     @IsNotEmpty()
-    @Column({name: 'password', select: false})
+    @Column({name: 'password'})
     password: string;
 
     @JoinColumn({ name: 'role_id' })
