@@ -13,6 +13,8 @@ import { UserService } from "./services/user.service";
 import { UserController } from "./controller/user.controller";
 import { LeaveService } from "./services/leave.service";
 import { LeaveController } from "./controller/leave.controller";
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 
 @Module({
     imports: [
@@ -30,6 +32,12 @@ import { LeaveController } from "./controller/leave.controller";
         TypeOrmModule.forFeature([Role, User, Leave]),
         JwtModule.register({
             secret: 'my-secret-key-long-enough'
+        }),
+        GraphQLModule.forRoot<ApolloDriverConfig>({
+            driver: ApolloDriver,
+            autoSchemaFile: true,
+            playground: true,
+            sortSchema: true
         })
     ],
     providers: [RoleService, AuthService, GuardService, UserService, LeaveService],
