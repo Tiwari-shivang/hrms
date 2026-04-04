@@ -9,6 +9,10 @@ import { AuthService } from "./services/auth.service";
 import { AuthController } from "./controller/auth.controller";
 import { JwtModule, JwtService } from "@nestjs/jwt";
 import { GuardService } from "./services/guard.service";
+import { UserService } from "./services/user.service";
+import { UserController } from "./controller/user.controller";
+import { LeaveService } from "./services/leave.service";
+import { LeaveController } from "./controller/leave.controller";
 
 @Module({
     imports: [
@@ -28,7 +32,7 @@ import { GuardService } from "./services/guard.service";
             secret: 'my-secret-key-long-enough'
         })
     ],
-    providers: [RoleService, AuthService, GuardService],
-    controllers: [RoleController, AuthController]
+    providers: [RoleService, AuthService, GuardService, UserService, LeaveService],
+    controllers: [RoleController, AuthController, UserController, LeaveController]
 })
 export class AppModule{}
